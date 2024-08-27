@@ -1,8 +1,14 @@
 #!/bin/bash
 
 # 提示用户输入文件内容
-echo "请输入文件内容（每行一条节点，结束输入按 Ctrl+D）:"
-input_content=$(cat)
+echo "请输入文件内容（每行一条节点，输入完成后按回车键开始统计）:"
+input_content=""
+while IFS= read -r line; do
+    if [[ -z "$line" ]]; then
+        break
+    fi
+    input_content+="$line"$'\n'
+done
 
 # 统计输入的总数量
 total_lines=$(echo "$input_content" | wc -l)
